@@ -1,13 +1,10 @@
-# Декоратор класса - добавляет обработку ошибок
 def safe_methods(cls):
-    # Сохраняем оригинальные методы
     original_methods = {}
     for name in cls.__dict__:
         method = getattr(cls, name)
         if callable(method):
             original_methods[name] = method
     
-    # Создаём новые методы с try-except
     for name, method in original_methods.items():
         def make_wrapper(m):
             def wrapper(self, *args, **kwargs):
